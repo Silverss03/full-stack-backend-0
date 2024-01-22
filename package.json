@@ -1,0 +1,26 @@
+{
+  "name": "fullstack-backend-from-0",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "sever.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node sever.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Silverss03/full-stack-backend-0.git"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "Silverss03",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Silverss03/full-stack-backend-0/issues"
+  },
+  "homepage": "https://github.com/Silverss03/full-stack-backend-0#readme",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
