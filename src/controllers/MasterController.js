@@ -17,8 +17,20 @@ const getNewPage = (req, res) => {
 }
 
 const postCreateUser = (req, res) => {
-    res.send(req.body)
-    //res.render()
+    let email = req.body.email ;
+    let name = req.body.name ;
+    let message = req.body.message ;
+    
+    connection.query(
+        'INSERT INTO Users (email, name, city) VALUES (?, ?, ?)',
+        [email, name, message],
+        function(err, results, fields) {
+            if (err) {
+                console.log(err)
+            }
+            res.send('User has been added to the database')
+        }
+    )
 }
 module.exports = {
     getHomePage, getNewPage, postCreateUser
