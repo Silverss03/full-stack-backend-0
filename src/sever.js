@@ -7,6 +7,11 @@ const app = express() //app
 const port = process.env.PORT || 3001 //port
 const hostname = process.env.HOST_NAME
 const connection = require('./config/database')
+
+//config request body
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 //template view config
 view_configuration(app)
 
@@ -16,7 +21,7 @@ app.use('/', web_routers)
 connection.query(
     'SELECT * FROM Users',
     function(err, results, fields) {
-        console.log("result",results) // results contains rows returned by server
+        //console.log("result",results) // results contains rows returned by server
         //console.log("field",fields) // fields contains extra meta data about results, if available
     }
 )

@@ -7,7 +7,6 @@ const getHomePage = (req, res) => {
         'SELECT * FROM Users',
         function(err, results, fields) {
             console.log("result",results) // results contains rows returned by server
-            //console.log("field",fields) // fields contains extra meta data about results, if available
             res.send(JSON.stringify(results))
         }
     )
@@ -17,6 +16,10 @@ const getNewPage = (req, res) => {
     res.render('sample.ejs')
 }
 
+const postCreateUser = (req, res) => {
+    res.send(req.body)
+    //res.render()
+}
 module.exports = {
-    getHomePage, getNewPage
+    getHomePage, getNewPage, postCreateUser
 }
