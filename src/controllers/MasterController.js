@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const connection = require('../config/database')
+const {getAllUsers} = require('../services/CRUDService')
 
 const getHomePage = async(req, res) => {
     try {
@@ -33,8 +34,9 @@ const getCreatePage = (req, res) => {
     res.render('create.ejs')
 }
 
-const getListPage = (req, res) => {
-    res.render('list.ejs')
+const getListPage = async (req, res) => {
+    let users = await getAllUsers()
+    res.render('list.ejs', {listUsers : users})
 }
 
 module.exports = {
