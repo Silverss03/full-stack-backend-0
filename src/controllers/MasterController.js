@@ -39,6 +39,10 @@ const getListPage = async (req, res) => {
     res.render('list.ejs', {listUsers : users})
 }
 
+const getUpdatePage = (req, res) => { 
+    res.render('edit.ejs')
+ }
+
 module.exports = {
-    getHomePage, getNewPage, postCreateUser, getCreatePage, getListPage
+    getHomePage, getNewPage, postCreateUser, getCreatePage, getListPage, getUpdatePage
 }
