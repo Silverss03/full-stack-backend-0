@@ -13,6 +13,6 @@ router.get('/list', getListPage)
 
 router.post('/create-user', postCreateUser)
 
-router.get('/update', getUpdatePage)
+router.get('/update/:id', getUpdatePage)
 
 module.exports = router

@@ -40,6 +40,7 @@ const getListPage = async (req, res) => {
 }
 
 const getUpdatePage = (req, res) => { 
+    const userID = req.params.id
     res.render('edit.ejs')
  }
 
