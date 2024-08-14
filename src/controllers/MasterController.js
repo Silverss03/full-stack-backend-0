@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const connection = require('../config/database')
-const {getAllUsers} = require('../services/CRUDService')
+const {getAllUsers, getUserById} = require('../services/CRUDService')
 
 const getHomePage = async(req, res) => {
     try {
@@ -27,7 +27,6 @@ const postCreateUser = async (req, res) => {
         [email, name, message]
     )
     res.send('Data has been inserted')
-    // res.redirect('/new')
 }
 
 const getCreatePage = (req, res) => {
@@ -39,9 +38,10 @@ const getListPage = async (req, res) => {
     res.render('list.ejs', {listUsers : users})
 }
 
-const getUpdatePage = (req, res) => { 
+const getUpdatePage = async (req, res) => { 
     const userID = req.params.id
-    res.render('edit.ejs')
+    user = await getUserById(userID)
+    res.render('edit.ejs', {selectedUser : user}) // x <- y
  }
 
 module.exports = {
