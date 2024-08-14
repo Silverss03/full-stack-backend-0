@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const connection = require('../config/database')
-const {getAllUsers, getUserById} = require('../services/CRUDService')
+const {getAllUsers, getUserById, updateUserById} = require('../services/CRUDService')
 
 const getHomePage = async(req, res) => {
     try {
@@ -17,17 +17,6 @@ const getNewPage = (req, res) => {
     res.render('sample.ejs')
 }
 
-const postCreateUser = async (req, res) => {
-    let email = req.body.email ;
-    let name = req.body.name ;
-    let message = req.body.message ;
-    
-    const [result, fields] = await connection.query(
-        'INSERT INTO Users (email, name, city) VALUES (?, ?, ?)',
-        [email, name, message]
-    )
-    res.send('Data has been inserted')
-}
 
 const getCreatePage = (req, res) => {
     res.render('create.ejs')
@@ -42,8 +31,31 @@ const getUpdatePage = async (req, res) => {
     const userID = req.params.id
     user = await getUserById(userID)
     res.render('edit.ejs', {selectedUser : user}) // x <- y
- }
+}
+
+const postCreateUser = async (req, res) => {
+    let email = req.body.email ;
+    let name = req.body.name ;
+    let message = req.body.message ;
+    
+    const [result, fields] = await connection.query(
+        'INSERT INTO Users (email, name, city) VALUES (?, ?, ?)',
+        [email, name, message]
+    )
+    res.redirect('/list')
+}
+
+const postUpdateUser = async (req, res) => {
+    let email = req.body.email ;
+    let name = req.body.name ;
+    let message = req.body.message ;
+    let userID = req.body.id ;
+    updateUserById(userID, email, name, message)
+
+    // res.send('Data has been updated')
+    res.redirect('/list')
+}
 
 module.exports = {
-    getHomePage, getNewPage, postCreateUser, getCreatePage, getListPage, getUpdatePage
+    getHomePage, getNewPage, postCreateUser, getCreatePage, getListPage, getUpdatePage, postUpdateUser
 }

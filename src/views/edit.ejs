@@ -43,8 +43,12 @@
                     <p><i class="ti-email"></i>Email: mail@mail.com</p>
                 </div>
                 <div class="col col-sec contact-form">
-                    <form action="/create-user" method="post">
+                    <form action="/update-user" method="post">
                         <div class="row">
+                            <div class="col col-sec">
+                                <input type="text" required placeholder="Id" name="id" id=""
+                                    class="form-control d-none" value="<%=selectedUser.id%>">
+                            </div>
                             <div class="col col-sec">
                                 <input type="text" required placeholder="Name" name="name" id=""
                                     class="form-control" value="<%=selectedUser.name%>">
