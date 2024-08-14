@@ -29,7 +29,7 @@ const getListPage = async (req, res) => {
 
 const getUpdatePage = async (req, res) => { 
     const userID = req.params.id
-    user = await getUserById(userID)
+    const user = await getUserById(userID)
     res.render('edit.ejs', {selectedUser : user}) // x <- y
 }
 
@@ -56,6 +56,18 @@ const postUpdateUser = async (req, res) => {
     res.redirect('/list')
 }
 
+const postDeleteUser = async (req, res) => {
+    const userID = req.params.id
+    const user = await getUserById(userID)
+    res.render('delete.ejs', {deleteUser : user})
+}
+
+const handleDeleteUser = async (req, res) => {
+    const userID = req.body.id
+    const [result, fields] = await connection.query('DELETE FROM Users WHERE id = ?', [userID])
+    res.redirect('/list')
+}
+
 module.exports = {
-    getHomePage, getNewPage, postCreateUser, getCreatePage, getListPage, getUpdatePage, postUpdateUser
+    getHomePage, getNewPage, postCreateUser, getCreatePage, getListPage, getUpdatePage, postUpdateUser, postDeleteUser, handleDeleteUser
 }
