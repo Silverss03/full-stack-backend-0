@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const connection = require('../config/database')
-const {getAllUsers, getUserById, updateUserById} = require('../services/CRUDService')
+const {getAllUsers, getUserById, updateUserById, deleteUserById} = require('../services/CRUDService')
 
 const getHomePage = async(req, res) => {
     try {
@@ -64,7 +64,7 @@ const postDeleteUser = async (req, res) => {
 
 const handleDeleteUser = async (req, res) => {
     const userID = req.body.id
-    const [result, fields] = await connection.query('DELETE FROM Users WHERE id = ?', [userID])
+    await deleteUserById(userID)
     res.redirect('/list')
 }
 
